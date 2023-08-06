@@ -6,7 +6,14 @@
 
 ### Q1: Choose all employees who have received an award (Nested Query)?
 Query:
-
+``` sql
+SELECT *
+FROM employee
+WHERE employee.id IN (
+    SELECT awards.employee_id
+    FROM awards
+);
+```
 Output:
  
 
@@ -18,7 +25,16 @@ Output:
  
 ### Q3: Choose all Developers who make more than all Managers combined (Nested Query)?
 Query:
-
+``` sql
+SELECT *
+FROM employee
+WHERE employee.role = 'Developer'
+  AND employee.salary > (
+    SELECT MAX(employee.salary)
+    FROM employee
+    WHERE employee.role = 'Manager'
+);
+```
 Output:
 
  
